@@ -9,9 +9,9 @@ def iniciar_app():
     #instanciamos la vista
     vista = InventarioVista()
     #instanciamos el controlador
-    controlador = InventarioControlador()
+    controlador = InventarioControlador(modelo, vista)
 
     vista.root.mainloop()
 
-    if __name__ == '__main__':
-        iniciar_app()
+if __name__ == '__main__':
+    iniciar_app()
