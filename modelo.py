@@ -32,3 +32,15 @@ class InventarioModelo:
         cursor.close()
         conexion.close()
         return resultado
+
+    def anadir_producto(self, nombre, precio, descripcion):
+        conexion=self.conectar()
+        cursor = conexion.cursor()
+        query= "INSERT INTO producto (nombre,precio, descripcion) VALUES (%s, %s, %s)"
+        valores = (nombre, precio, descripcion)
+        cursor.execute(query, valores)
+        conexion.commit()
+        cursor.close()
+        conexion.close()
+
+
