@@ -5,7 +5,7 @@ class InventarioVista:
     def __init__(self):
         self.root=tb.Window(themename="darkly")
         self.root.title("Gestion de Inventario")
-        self.root.minsize(1025,600)
+        self.root.minsize(1100,600)
 
 # Configuramos las columnas para que se estiren por igual
         self.root.columnconfigure(0, weight=1)
@@ -29,7 +29,7 @@ class InventarioVista:
         caja_izq = tb.Frame(self.root, bootstyle="primary", padding=20)
         caja_izq.columnconfigure(0, weight=1)
         caja_izq.grid(row=3, column=0, padx=10, pady=10, sticky="nsew")
-        tb.Label(caja_izq, text="Caja izquierda titulo", bootstyle="light", anchor="center", justify="center").grid(row=0,column=0,sticky="nsew",padx=10, pady=10)
+        tb.Label(caja_izq, text="Añadir producto", bootstyle="light", anchor="center", justify="center").grid(row=0,column=0,sticky="nsew",padx=10, pady=10)
         frame_formulario=tb.Frame(caja_izq, bootstyle="primary", padding=20, borderwidth=1, relief="solid")
         frame_formulario.grid(row=1, column=0, padx=10, pady=10, sticky="nsew")
         frame_formulario.columnconfigure(0, weight=1)
@@ -52,7 +52,7 @@ class InventarioVista:
         caja_der = tb.Frame(self.root, bootstyle="primary", padding=20)
         caja_der.grid(row=3, column=1, padx=10, pady=10, sticky="nsew")
         caja_der.columnconfigure(0, weight=1)
-        tb.Label(caja_der, text="Caja derecha titulo", bootstyle="light", anchor="center", justify="center").grid(row=0,column=0,sticky="nsew", pady=10)
+        tb.Label(caja_der, text="Buscar producto", bootstyle="light", anchor="center", justify="center").grid(row=0,column=0,sticky="nsew", pady=10)
 
         frame_buscar=tb.Frame(caja_der, bootstyle="primary", padding=20, borderwidth=1, relief="solid")
         frame_buscar.grid(row=1, column=0, sticky="ew", pady=10)
@@ -64,9 +64,9 @@ class InventarioVista:
         frame_botones.grid(sticky="sew",pady=25)
         frame_botones.columnconfigure(0, weight=1)
         frame_botones.columnconfigure(1, weight=1)
-        boton_buscar=tb.Button(frame_botones,text="Boton 1", bootstyle="dark")
+        boton_buscar=tb.Button(frame_botones,text="Buscar", bootstyle="dark")
         boton_buscar.grid(row=0, column=0, sticky="ew",padx=(10,10))
-        boton_mostrartodo=tb.Button(frame_botones,text="Boton 2", bootstyle="dark")
+        boton_mostrartodo=tb.Button(frame_botones,text="Mostrar Todos", bootstyle="dark")
         boton_mostrartodo.grid(row=0, column=1, sticky="ew", padx=(10,10))
 
         # --- FILA 1 (Abajo) ---
@@ -88,30 +88,16 @@ class InventarioVista:
         # 2. Configurar Encabezados (Lo que se ve arriba)
         self.tabla.heading("id", text="ID", anchor="center")
         self.tabla.heading("nombre", text="Nombre", anchor="w") # 'w' es alineado a la izquierda
-        self.tabla.heading("precio", text="Categoría", anchor="w")
-        self.tabla.heading("descripcion", text="Estado", anchor="center")
+        self.tabla.heading("precio", text="Precio", anchor="w")
+        self.tabla.heading("descripcion", text="Descripcion", anchor="center")
 
         # 3. Ocultamos el ID de la tabla
         self.tabla["displaycolumns"]=("nombre","precio","descripcion")
 
-        # 3. Configurar Columnas (Lo que alinea los datos de abajo)
+        # 4. Configurar Columnas (Lo que alinea los datos de abajo)
         # El 'anchor' aquí debe coincidir con el del encabezado para que se vean alineados
         self.tabla.column("id", width=200, anchor="center", stretch=False)
         self.tabla.column("nombre", width=200, anchor="w")
         self.tabla.column("precio", width=200, anchor="w")
         self.tabla.column("descripcion", width=200, anchor="center")
-
-        # 4. Insertar datos
-        datos = [
-            ("1", "Producto A", "Electrónica", "Disponible"),
-            ("2", "Producto B", "Hogar", "Agotado"),
-            ("3", "Producto C", "Oficina", "En Stock"),
-            ("4", "Producto D", "Jardín", "Disponible"),
-            ("5", "Producto E", "Electrónica", "En Stock"),
-            ("6", "Producto F", "Moda", "Sin Stock")
-        ]
-
-        for fila in datos:
-            self.tabla.insert("", "end", values=fila)
-
         self.tabla.grid(row=0, column=0, sticky="nsew")
