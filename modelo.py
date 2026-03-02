@@ -44,3 +44,13 @@ class InventarioModelo:
         conexion.close()
 
 
+    def eliminar_producto(self, id):
+        conexion=self.conectar()
+        cursor = conexion.cursor()
+        query= "DELETE FROM producto WHERE id = %s"
+        valores = (id,)
+        cursor.execute(query, valores)
+        conexion.commit()
+        cursor.close()
+        conexion.close()
+

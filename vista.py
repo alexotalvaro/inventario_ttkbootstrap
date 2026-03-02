@@ -99,5 +99,10 @@ class InventarioVista:
         self.tabla.column("id", width=200, anchor="center", stretch=False)
         self.tabla.column("nombre", width=200, anchor="w")
         self.tabla.column("precio", width=200, anchor="w")
-        self.tabla.column("descripcion", width=200, anchor="center")
+        self.tabla.column("descripcion", width=250, anchor="center")
         self.tabla.grid(row=0, column=0, sticky="nsew")
+
+        self.boton_eliminar = tb.Button(caja_abajo,text="Eliminar", bootstyle="dark")
+        self.boton_modificar = tb.Button(caja_abajo, text="Modificar", bootstyle="dark")
+        self.boton_eliminar.pack(side="left", expand=True,anchor="e", padx=5, pady=10)
+        self.boton_modificar.pack(side="left", expand=True,anchor="w", padx=5, pady=10)

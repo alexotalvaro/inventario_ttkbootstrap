@@ -5,6 +5,7 @@ class InventarioControlador():
         self.modelo = modelo
         self.vista = vista
         self.vista.boton_anadir.config(command=self.anadir_producto)
+        self.vista.boton_eliminar.config(command=self.eliminar_producto)
         self.mostrar_productos()
 
     def limpiar_campos(self):
@@ -39,4 +40,14 @@ class InventarioControlador():
         self.modelo.anadir_producto(nombre, precio, descripcion)
         self.mostrar_productos()
         self.limpiar_campos()
+
+
+    def eliminar_producto(self):
+        seleccionado=self.vista.tabla.selection()
+        if seleccionado:
+            for item in seleccionado:
+                valor_fila=self.vista.tabla.item(item)['values']
+                id_producto=valor_fila[0]
+                self.modelo.eliminar_producto(id_producto)
+        self.mostrar_productos()
 
