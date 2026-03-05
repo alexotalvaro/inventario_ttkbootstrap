@@ -1,11 +1,14 @@
 from ttkbootstrap.dialogs import Messagebox
 
-class InventarioControlador():
+class InventarioControlador:
     def __init__(self, modelo, vista):
         self.modelo = modelo
         self.vista = vista
         self.vista.boton_anadir.config(command=self.anadir_producto)
         self.vista.boton_eliminar.config(command=self.eliminar_producto)
+        self.vista.boton_buscar.config(command=self.buscar_productos)
+        self.vista.boton_mostrartodo.config(command=self.mostrar_productos)
+        # self.vista.boton_login.config(command=self.iniciar_sesion)
         self.mostrar_productos()
 
     def limpiar_campos(self):
@@ -50,4 +53,24 @@ class InventarioControlador():
                 id_producto=valor_fila[0]
                 self.modelo.eliminar_producto(id_producto)
         self.mostrar_productos()
+
+
+    def buscar_productos(self):
+        buscado=self.vista.entry_buscar.get()
+        if buscado == "":
+            Messagebox.show_info("No estas buscando nada", "Advertencia")
+            return
+        for i in self.vista.tabla.get_children():
+            self.vista.tabla.delete(i)
+        resultado=self.modelo.buscar_producto(buscado)
+        for producto in resultado:
+            self.vista.tabla.insert("", "end", values=producto)
+
+        self.limpiar_campos()
+
+
+
+    def iniciar_sesion(self):
+
+        pass
 

@@ -54,3 +54,15 @@ class InventarioModelo:
         cursor.close()
         conexion.close()
 
+    def buscar_producto(self, nombre):
+        conexion=self.conectar()
+        cursor = conexion.cursor()
+        query="SELECT * FROM producto WHERE nombre LIKE %s"
+        valores = (f"%{nombre}%",)
+        cursor.execute(query, valores)
+        resultado = cursor.fetchall()
+        cursor.close()
+        conexion.close()
+        return resultado
+
+

@@ -83,7 +83,7 @@ class InventarioVista:
 
         # 1. Definir columnas
         columnas = ("id", "nombre", "precio", "descripcion")
-        self.tabla = tb.Treeview(frame_tabla, bootstyle="secondary", columns=columnas, show="headings", height=5)
+        self.tabla = tb.Treeview(frame_tabla, bootstyle="secondary", columns=columnas, show="headings", height=10)
 
         # 2. Configurar Encabezados (Lo que se ve arriba)
         self.tabla.heading("id", text="ID", anchor="center")
