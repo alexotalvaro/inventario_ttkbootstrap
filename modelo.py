@@ -66,3 +66,13 @@ class InventarioModelo:
         return resultado
 
 
+    def modificar_producto(self,nombre,precio,descripcion,id):
+        conexion=self.conectar()
+        cursor = conexion.cursor()
+        query= "UPDATE producto SET nombre= %s, precio = %s, descripcion = %s WHERE id = %s"
+        valores = (nombre,precio,descripcion,id)
+        cursor.execute(query, valores)
+        conexion.commit()
+        cursor.close()
+        conexion.close()
+

@@ -1,3 +1,5 @@
+from tkinter import messagebox
+
 from ttkbootstrap.dialogs import Messagebox
 
 class InventarioControlador:
@@ -8,7 +10,7 @@ class InventarioControlador:
         self.vista.boton_eliminar.config(command=self.eliminar_producto)
         self.vista.boton_buscar.config(command=self.buscar_productos)
         self.vista.boton_mostrartodo.config(command=self.mostrar_productos)
-        # self.vista.boton_login.config(command=self.iniciar_sesion)
+        self.vista.boton_modificar.config(command=self.modificar_producto)
         self.mostrar_productos()
 
     def limpiar_campos(self):
@@ -69,6 +71,27 @@ class InventarioControlador:
         self.limpiar_campos()
 
 
+    def modificar_producto(self):
+        seleccionado=self.vista.tabla.selection()
+        if seleccionado:
+            nombre = self.vista.entry_nombre.get()
+            precio = self.vista.entry_precio.get()
+            descripcion = self.vista.entry_descripcion.get()
+            try:
+                precio = float(precio)
+            except:
+                Messagebox.show_error("Precio tiene que ser un número", "Error")
+                return
+            for item in seleccionado:
+                valor_fila=self.vista.tabla.item(item)['values']
+                id_producto=valor_fila[0]
+                self.modelo.modificar_producto(nombre, precio, descripcion,id_producto)
+            Messagebox.show_info("Producto modificado correctamente", "¡Bien!")
+            self.mostrar_productos()
+            self.limpiar_campos()
+        else:
+            Messagebox.show_info("No has seleccionado nada", "¡Vaya!")
+            return
 
     def iniciar_sesion(self):
 
