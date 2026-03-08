@@ -76,3 +76,13 @@ class InventarioModelo:
         cursor.close()
         conexion.close()
 
+    def validar_usuario(self,usuario,password):
+        conexion=self.conectar()
+        cursor = conexion.cursor()
+        query= "SELECT * FROM usuario WHERE nombre = %s AND password = %s"
+        valores = (usuario,password)
+        cursor.execute(query, valores)
+        resultado = cursor.fetchall()
+        cursor.close()
+        conexion.close()
+        return resultado is not None

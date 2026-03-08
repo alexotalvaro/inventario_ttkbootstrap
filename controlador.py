@@ -1,17 +1,26 @@
-from tkinter import messagebox
-
 from ttkbootstrap.dialogs import Messagebox
 
 class InventarioControlador:
     def __init__(self, modelo, vista):
         self.modelo = modelo
         self.vista = vista
+        self.usuario = "vendedor"
         self.vista.boton_anadir.config(command=self.anadir_producto)
         self.vista.boton_eliminar.config(command=self.eliminar_producto)
         self.vista.boton_buscar.config(command=self.buscar_productos)
         self.vista.boton_mostrartodo.config(command=self.mostrar_productos)
         self.vista.boton_modificar.config(command=self.modificar_producto)
+        self.vista.boton_login.config(command=self.iniciar_sesion)
+        self.aplicar_permisos()
         self.mostrar_productos()
+
+    def aplicar_permisos(self):
+        if self.usuario == "vendedor":
+            self.vista.boton_modificar.config(state="disabled")
+            self.vista.boton_eliminar.config(state="disabled")
+        else:
+            self.vista.boton_modificar.config(state="normal")
+            self.vista.boton_eliminar.config(state="normal")
 
     def limpiar_campos(self):
         self.vista.entry_nombre.delete(0, "end")
@@ -94,6 +103,13 @@ class InventarioControlador:
             return
 
     def iniciar_sesion(self):
+        from login import InventarioLogin
+        self.ventana_login = InventarioLogin(self)
 
-        pass
-
+    def validar_usuario(self,usuario,password):
+        if self.modelo.validar_usuario(usuario,password):
+            self.usuario=usuario
+            self.ventana_login.root.destroy()
+            self.aplicar_permisos()
+        else:
+            Messagebox.show_info("Credenciales incorrectas", "Error")

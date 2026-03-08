@@ -1,6 +1,7 @@
 from modelo import InventarioModelo
 from vista import InventarioVista
 from controlador import InventarioControlador
+from login import InventarioLogin
 
 
 def iniciar_app():
@@ -10,7 +11,6 @@ def iniciar_app():
     vista = InventarioVista()
     #instanciamos el controlador
     controlador = InventarioControlador(modelo, vista)
-
     vista.root.mainloop()
 
 if __name__ == '__main__':

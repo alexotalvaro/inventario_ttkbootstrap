@@ -21,8 +21,8 @@ class InventarioVista:
         caja_titulo.grid(row=2, column=0, columnspan=2, padx=10, pady=10, sticky="nsew")
         caja_titulo.columnconfigure(0, weight=1)
         tb.Label(caja_titulo, text="Nombre de la empresa", bootstyle="inverse-primary", font="Helvetica").grid(row=0,column=0,sticky="w")
-        boton_login=tb.Button(caja_titulo, text="Login "+emoji.emojize("👨‍💻"), bootstyle="submit")
-        boton_login.grid(row=0,column=0,sticky="e")
+        self.boton_login=tb.Button(caja_titulo, text="Login "+emoji.emojize("👨‍💻"), bootstyle="submit")
+        self.boton_login.grid(row=0,column=0,sticky="e")
 
         # --- FILA 0 (Arriba) ---
         # Caja Arriba Izquierda (Fila 0, Columna 0) FORMULARIO
