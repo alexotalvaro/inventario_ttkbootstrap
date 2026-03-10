@@ -15,12 +15,12 @@ class InventarioControlador:
         self.mostrar_productos()
 
     def aplicar_permisos(self):
-        if self.usuario == "vendedor":
-            self.vista.boton_modificar.config(state="disabled")
-            self.vista.boton_eliminar.config(state="disabled")
-        else:
+        if self.usuario == "admin":
             self.vista.boton_modificar.config(state="normal")
             self.vista.boton_eliminar.config(state="normal")
+        else:
+            self.vista.boton_modificar.config(state="disabled")
+            self.vista.boton_eliminar.config(state="disabled")
 
     def limpiar_campos(self):
         self.vista.entry_nombre.delete(0, "end")
